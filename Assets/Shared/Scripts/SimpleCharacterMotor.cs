@@ -59,10 +59,11 @@ public class SimpleCharacterMotor : MonoBehaviour
         if (controller.isGrounded)
         {
             var x = Input.GetAxis("Horizontal");
-            var z = Input.GetAxis("Vertical");
+            var z = Input.GetAxis("Vertical"); 
             var run = Input.GetKey(KeyCode.LeftShift);
 
             var translation = new Vector3(x, 0, z);
+           
             speed = run ? runSpeed : walkSpeed;
             movement = transform.TransformDirection(translation * speed);
         }
