@@ -4,4 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Tsukiyomi.unity
+    guid: 3ee10bbfb5d28cf4ab34b45f2af02ba2
+  m_configObjects: {}
