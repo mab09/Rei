@@ -6,8 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class GameLogic : MonoBehaviour
 {
-    public static int lchoice = 0;
-    public static int rchoice = 0;
     public static bool reset = false;
     public Button restart;
     public Text finalresult;
@@ -15,10 +13,6 @@ public class GameLogic : MonoBehaviour
     void Start()
     {
         restart.onClick.AddListener(TaskOnClick);
-        /* TODO rock paper scissor logic:
-        left.strikeL; --input of left player
-        right.strikeR; --input of right player
-        */
     }
 
     void TaskOnClick()
@@ -30,12 +24,12 @@ public class GameLogic : MonoBehaviour
     void Update()
     {
         string result = "Begin";
-        lchoice = LeftPlayer.strikeL;
-        rchoice = RightPlayer.strikeR;
+        int lchoice = LeftPlayer.strikeL;
+        int rchoice = RightPlayer.strikeR;
 
-        if (lchoice == 0 && rchoice != 0) { result = "Left loses"; }
-        else if (rchoice == 0 && lchoice != 0) { result = "Right loses"; }
-        else if (rchoice == 0 && lchoice == 0) { result = "Begin"; }
+        if (lchoice == 0 && rchoice != 0) { result = "Shogun loses"; } //Shogun didn't move
+        else if (rchoice == 0 && lchoice != 0) { result = "Rei loses"; } //Rei didn't move
+        else if (rchoice == 0 && lchoice == 0) { result = "Begin"; } //Initial
         else
         {
             if (rchoice != lchoice)
@@ -44,50 +38,46 @@ public class GameLogic : MonoBehaviour
                 {
                     if (lchoice == 2)
                     {
-                        result = "Left wins";
+                        result = "Shogun wins"; //Shogun: Paper x Rei: Rock
                     }
                     else if (lchoice == 3)
                     {
-                        result = "Right wins";
+                        result = "Rei wins"; //Shogun: Scissor x Rei: Rock
                     }
                 }
                 else if (rchoice == 2)
                 {
                     if (lchoice == 1)
                     {
-                        result = "Right wins";
+                        result = "Rei wins"; //Shogun: Rock x Rei: Paper
                     }
                     else if (lchoice == 3)
                     {
-                        result = "Left wins";
+                        result = "Shogun wins"; //Shogun: Scissor x Rei: Paper
                     }
                 }
                 else if (rchoice == 3)
                 {
                     if (lchoice == 1)
                     {
-                        result = "Left wins";
+                        result = "Shogun wins"; //Shogun: Rock x Rei: Scissor
                     }
                     else if (lchoice == 2)
                     {
-                        result = "Right wins";
+                        result = "Rei wins"; //Shogun: Paper x Rei: Scissor
                     }
                 }
             }
-            else { result = "Draw"; }
+            else { result = "Again!"; } //Draw
         }
         if (reset == true)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            LeftPlayer.clickL = 9;
-            RightPlayer.clickR = 9;
-            result = "Begin";
-            lchoice = 0; rchoice = 0;
+            if(SceneManager.GetActiveScene().name == "Amaterasu") SceneManager.LoadScene("Tsukiyomi");
+            else SceneManager.LoadScene("Amaterasu");
             LeftPlayer.strikeL = 0;
             RightPlayer.strikeR = 0;
             reset = false;
         }
-        //Debug.Log(result);
         finalresult.text = result;
     } 
 }
