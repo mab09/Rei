@@ -9,7 +9,8 @@ public class RightPlayer : MonoBehaviour
 {
     public static int strikeR = 0; //no action
     [Header("Movement")]
-    public float speed = 4;
+    public float speed = 50;
+    public static float pos = 0;
     public Button button0, button4, button5, button6;
 
     CharacterController controller;
@@ -32,10 +33,13 @@ public class RightPlayer : MonoBehaviour
 
     void FixedUpdate()
     {
-        var translation = new Vector3(0, 0, 0);
-        if (strikeR != 0) translation = new Vector3(0, 0, 60);
-        movement = transform.TransformDirection(translation * speed);
-        finalMovement = Vector3.Lerp(finalMovement, movement, Time.fixedDeltaTime); 
-        controller.Move(finalMovement * Time.fixedDeltaTime);
+        pos = transform.position.x;
+        movement = new Vector3(-1 * speed * Time.fixedDeltaTime, 0, 0);
+        //movement = transform.TransformDirection(translation * speed);
+        if (strikeR != 0)
+            finalMovement = Vector3.Lerp(finalMovement, movement, Time.fixedDeltaTime);
+        else
+            finalMovement = new Vector3(0, 0, 0);
+        controller.Move(finalMovement);
     }
 }

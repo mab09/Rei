@@ -9,8 +9,8 @@ public class LeftPlayer : MonoBehaviour
 {
     public static int strikeL = 0; //no action
     [Header("Movement")]
-    public float speed = 4;
-
+    public float speed = 50;
+    public static float pos = 0;
     public Button button3, button0, button1, button2;
     CharacterController controller;
     Vector3 movement, finalMovement;
@@ -32,10 +32,13 @@ public class LeftPlayer : MonoBehaviour
 
     void FixedUpdate()
     {
-        var translation = new Vector3(0, 0, 0);
-        if (strikeL != 0) translation = new Vector3(0, 0, -60);
-        movement = transform.TransformDirection(translation * speed * -1);
-        finalMovement = Vector3.Lerp(finalMovement, movement, Time.fixedDeltaTime);
-        controller.Move(finalMovement * Time.fixedDeltaTime);
+        pos = transform.position.x;
+        movement = new Vector3(speed * Time.fixedDeltaTime, 0, 0);
+        //movement = transform.TransformDirection(translation * speed * -1);
+        if (strikeL != 0)
+            finalMovement = Vector3.Lerp(finalMovement, movement, Time.fixedDeltaTime);
+        else
+            finalMovement = new Vector3(0, 0, 0);
+        controller.Move(finalMovement);
     }
 }
