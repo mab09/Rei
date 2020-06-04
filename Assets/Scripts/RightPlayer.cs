@@ -10,8 +10,9 @@ public class RightPlayer : MonoBehaviour
     public static int strikeR = 0; //no action
     [Header("Movement")]
     public float speed = 50;
-    public static float pos = 0;
+    public static float pos = 0, timeR;
     public Button button0, button4, button5, button6;
+    public static bool rlose = false;
 
     CharacterController controller;
     Vector3 movement, finalMovement;
@@ -28,7 +29,16 @@ public class RightPlayer : MonoBehaviour
 
     void ButtonClicked(int a)
     {
-        strikeR = a;
+        if (GameLogic.begin == true)
+        {
+            strikeR = a;
+            timeR = Time.deltaTime;
+        }
+        else
+        {
+            //rei is impatient
+            rlose = true;
+        }
     }
 
     void FixedUpdate()

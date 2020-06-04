@@ -10,8 +10,10 @@ public class LeftPlayer : MonoBehaviour
     public static int strikeL = 0; //no action
     [Header("Movement")]
     public float speed = 50;
-    public static float pos = 0;
+    public static float pos = 0, timeL;
     public Button button3, button0, button1, button2;
+    public static bool llose = false;
+
     CharacterController controller;
     Vector3 movement, finalMovement;
 
@@ -27,7 +29,17 @@ public class LeftPlayer : MonoBehaviour
 
     void ButtonClicked(int a)
     {
-       strikeL = a;
+        if (GameLogic.begin == true)
+        {
+            strikeL = a;
+            timeL = Time.deltaTime;
+        }
+        else
+        {
+            //shogun is impatient
+            llose = true;
+        }
+            
     }
 
     void FixedUpdate()
