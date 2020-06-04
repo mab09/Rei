@@ -11,33 +11,36 @@ public class RightPlayer : MonoBehaviour
     [Header("Movement")]
     public float speed = 50;
     public static float pos = 0, timeR;
-    public Button button0, button4, button5, button6;
+    public Button /* button0 */ button4, button5, button6;
     public static bool rlose = false;
 
     CharacterController controller;
     Vector3 movement, finalMovement;
 
 
-    void Awake()
+    void Start()
     {
         controller = GetComponent<CharacterController>();
         button4.onClick.AddListener(() => ButtonClicked(1)); //rock
         button5.onClick.AddListener(() => ButtonClicked(2)); //paper
         button6.onClick.AddListener(() => ButtonClicked(3)); //scissor
-        button0.onClick.AddListener(() => ButtonClicked(0)); //nothing
+       // button0.onClick.AddListener(() => ButtonClicked(0)); //nothing
     }
 
     void ButtonClicked(int a)
     {
-        if (GameLogic.begin == true)
+        if (GameLogic.ready == true)
         {
-            strikeR = a;
-            timeR = Time.deltaTime;
-        }
-        else
-        {
-            //rei is impatient
-            rlose = true;
+            if (GameLogic.begin == true)
+            {
+                strikeR = a;
+                timeR = Time.deltaTime;
+            }
+            else
+            {
+                //rei is impatient
+                rlose = true;
+            }
         }
     }
 

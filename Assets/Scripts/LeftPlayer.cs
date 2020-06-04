@@ -11,17 +11,17 @@ public class LeftPlayer : MonoBehaviour
     [Header("Movement")]
     public float speed = 50;
     public static float pos = 0, timeL;
-    public Button button3, button0, button1, button2;
+    public Button button3, /* button0 */ button1, button2;
     public static bool llose = false;
 
     CharacterController controller;
     Vector3 movement, finalMovement;
 
 
-    void Awake()
+    void Start()
     {
         controller = GetComponent<CharacterController>();
-        button0.onClick.AddListener(() => ButtonClicked(0)); //nothing
+       // button0.onClick.AddListener(() => ButtonClicked(0)); //nothing
         button1.onClick.AddListener(() => ButtonClicked(1)); //rock
         button2.onClick.AddListener(() => ButtonClicked(2)); //paper
         button3.onClick.AddListener(() => ButtonClicked(3)); //scissor
@@ -29,15 +29,18 @@ public class LeftPlayer : MonoBehaviour
 
     void ButtonClicked(int a)
     {
-        if (GameLogic.begin == true)
+        if (GameLogic.ready == true)
         {
-            strikeL = a;
-            timeL = Time.deltaTime;
-        }
-        else
-        {
-            //shogun is impatient
-            llose = true;
+            if (GameLogic.begin == true)
+            {
+                strikeL = a;
+                timeL = Time.deltaTime;
+            }
+            else
+            {
+                //shogun is impatient
+                llose = true;
+            }
         }
             
     }

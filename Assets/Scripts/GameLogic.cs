@@ -5,20 +5,38 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameLogic : MonoBehaviour
-{
-    public static bool reset = false, ready = false, begin = false;
-    public Button restart, readyB;
-    public Text finalresult;
+{                 //start move  //start count
+    public static bool begin, ready, ai; 
     private float time0, go;
-    bool end;
+    private bool end, reset;
+    public static string aitext = "PvP";
+    private int AIChoice, AISpeed;
+
+    public Button restart, readyB, aibutton;
+    public Text finalresult;
     // Start is called before the first frame update
     void Start() 
     {
-        restart.onClick.AddListener(TaskOnClick);
+        restart.onClick.AddListener(ResetOnClick);
         readyB.onClick.AddListener(ReadyOnClick);
+        aibutton.onClick.AddListener(AIOnClick);
         finalresult.text = "Begin";
         end = false;
+        reset = false;
+        ready = false;
+        begin = false;
         go = Random.Range(2.5f, 10f);
+        AIChoice = Random.Range(1, 4);
+        AISpeed = Random.Range(0, 2);
+    }
+
+    void AIOnClick()
+    {
+        ai = !ai;
+        if (ai)
+            aitext = "PvE"; //aibutton.GetComponentInChildren<Text>().text = "PvE";
+        else
+            aitext = "PvP"; //aibutton.GetComponentInChildren<Text>().text = "PvP";
     }
 
     void ReadyOnClick()
@@ -27,7 +45,7 @@ public class GameLogic : MonoBehaviour
         ready = true;
     }
 
-    void TaskOnClick()
+    void ResetOnClick()
     {
         reset = true;
     }
@@ -35,9 +53,10 @@ public class GameLogic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        string result = "Begin";
+        string result = "Begin", Left = "Shogun", Right = "Rei";
         int lchoice = LeftPlayer.strikeL;
         int rchoice = RightPlayer.strikeR;
+        aibutton.GetComponentInChildren<Text>().text = aitext;
 
         if (ready == true && end == false) {
             time0 += Time.deltaTime;
@@ -49,15 +68,25 @@ public class GameLogic : MonoBehaviour
             {
                 finalresult.text = "3";
                 begin = true;
+                if (ai == true)
+                {
+                    if (time0 >= go + AISpeed) 
+                    {
+                        LeftPlayer.strikeL = AIChoice; 
+                        lchoice = LeftPlayer.strikeL;
+                        //Debug.Log(AISpeed);
+                        LeftPlayer.timeL = Time.deltaTime;
+                    }
+                }
                 if (rchoice == 0 && lchoice == 0) { /*result = "Begin"; */ } //Initial
-                else if (rchoice == 0 && lchoice != 0) { result = "Rei loses"; } //Rei didn't move
-                else if (lchoice == 0 && rchoice != 0) { result = "Shogun loses"; } //Shogun didn't move
+                else if (rchoice == 0 && lchoice != 0) { result = Right + " loses"; } //Rei didn't move
+                else if (lchoice == 0 && rchoice != 0) { result = Left + " loses"; } //Shogun didn't move
                 else
                 {
-                    if (LeftPlayer.timeL > RightPlayer.timeR + 0.5f) //Rei is patient
-                        result = "Rei Wins";
-                    else if (RightPlayer.timeR > LeftPlayer.timeL + 0.5f) //Shogun is patient; change time with speed
-                        result = "Shogun Wins";
+                    if (LeftPlayer.timeL > RightPlayer.timeR + 2f) //Rei is patient
+                        result = Right + " Wins, patience";
+                    else if (RightPlayer.timeR > LeftPlayer.timeL + 2f) //Shogun is patient; icrease to make difficult mean value = 0.5f
+                        result = Left + " Wins, patience";
                     else
                     {
                         if (rchoice != lchoice)
@@ -66,33 +95,33 @@ public class GameLogic : MonoBehaviour
                             {
                                 if (lchoice == 2)
                                 {
-                                    result = "Shogun wins"; //Shogun: Paper x Rei: Rock
+                                    result = Left + " wins"; //Shogun: Paper x Rei: Rock
                                 }
                                 else if (lchoice == 3)
                                 {
-                                    result = "Rei wins"; //Shogun: Scissor x Rei: Rock
+                                    result = Right + " wins"; //Shogun: Scissor x Rei: Rock
                                 }
                             }
                             else if (rchoice == 2)
                             {
                                 if (lchoice == 1)
                                 {
-                                    result = "Rei wins"; //Shogun: Rock x Rei: Paper
+                                    result = Right + " wins"; //Shogun: Rock x Rei: Paper
                                 }
                                 else if (lchoice == 3)
                                 {
-                                    result = "Shogun wins"; //Shogun: Scissor x Rei: Paper
+                                    result = Left + " wins"; //Shogun: Scissor x Rei: Paper
                                 }
                             }
                             else if (rchoice == 3)
                             {
                                 if (lchoice == 1)
                                 {
-                                    result = "Shogun wins"; //Shogun: Rock x Rei: Scissor
+                                    result = Left + " wins"; //Shogun: Rock x Rei: Scissor
                                 }
                                 else if (lchoice == 2)
                                 {
-                                    result = "Rei wins"; //Shogun: Paper x Rei: Scissor
+                                    result = Right + " wins"; //Shogun: Paper x Rei: Scissor
                                 }
                             }
                         }
@@ -109,23 +138,34 @@ public class GameLogic : MonoBehaviour
                     end = true;
                 }
             }
+            if (LeftPlayer.llose == true && RightPlayer.rlose == true)
+            {
+                finalresult.text = "Double Harakiri";
+                end = true;
+            }
+            else if (LeftPlayer.llose == true)
+            {
+                finalresult.text = Left + " does Harakiri";
+                end = true;
+            }
+            else if (RightPlayer.rlose == true)
+            {
+                finalresult.text = Right + " does Harakiri";
+                end = true;
+            }
         }
-        if (LeftPlayer.llose == true && RightPlayer.rlose == true)
-            finalresult.text = "Double Harakiri";
-        else if(LeftPlayer.llose == true)
-            finalresult.text = "Shogun does Harakiri";
-        else if(RightPlayer.rlose == true)
-            finalresult.text = "Rei does Harakiri";
+
+
         if (reset == true)
         {
-            if (SceneManager.GetActiveScene().name == "Amaterasu") SceneManager.LoadScene("Tsukiyomi");
-            else SceneManager.LoadScene("Amaterasu");
-            finalresult.text = "Begin";
+            SceneManager.LoadScene(Random.Range(0, SceneManager.sceneCount + 2));
+           // finalresult.text = "Begin";
             LeftPlayer.llose = false;
             RightPlayer.rlose = false;
-            reset = false;
-            ready = false;
-            end = false;
+           // reset = false;
+           // ready = false;
+           // end = false;
+           // ai = false;s
         }
     } 
 }
