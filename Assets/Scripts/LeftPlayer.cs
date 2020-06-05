@@ -11,7 +11,7 @@ public class LeftPlayer : MonoBehaviour
     [Header("Movement")]
     public float speed = 50;
     public static float pos = 0, timeL;
-    public Button button3, /* button0 */ button1, button2;
+    public Button button1, /* button0 */ button2, button3;
     public static bool llose = false;
 
     CharacterController controller;
