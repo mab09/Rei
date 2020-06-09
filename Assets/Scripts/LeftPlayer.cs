@@ -14,7 +14,7 @@ public class LeftPlayer : MonoBehaviour
     public Button button1, /* button0 */ button2, button3;
     public static bool llose = false;
     public static Animator anim;
-    private GameObject katanaOn, katanaOff;
+    public static GameObject katanaOn, katanaOff;
 
     CharacterController controller;
     Vector3 movement, finalMovement;

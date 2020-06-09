@@ -14,13 +14,17 @@ public class GameLogic : MonoBehaviour
 
     public Button restart, readyB, aibutton;
     public Text finalresult;
+
+    public AudioSource IHBeat, FHBeat;
+    private bool ib1 = true, ib2 = true, fb = true; 
+
     // Start is called before the first frame update
     void Start() 
     {
         restart.onClick.AddListener(ResetOnClick);
         readyB.onClick.AddListener(ReadyOnClick);
         aibutton.onClick.AddListener(AIOnClick);
-        finalresult.text = "Begin";
+        //finalresult.text = "Begin";
         end = false;
         reset = false;
         ready = false;
@@ -56,6 +60,7 @@ public class GameLogic : MonoBehaviour
         string result = "Begin", Left = "Shogun", Right = "Rei";
         int lchoice = LeftPlayer.strikeL;
         int rchoice = RightPlayer.strikeR;
+        int winner = 0;
         aibutton.GetComponentInChildren<Text>().text = aitext;
 
         if (ready == true && end == false) {
@@ -64,17 +69,32 @@ public class GameLogic : MonoBehaviour
             RightPlayer.timeR += Time.deltaTime;
             if (time0 <= 2)
             {
-                finalresult.text = "1";
+               // finalresult.text = "1";
+                if (ib1)
+                {
+                    IHBeat.Play();
+                    ib1 = false;
+                }
                 LeftPlayer.anim.SetTrigger("TriggerReady");
                 RightPlayer.anim.SetTrigger("TriggerReady");
             }
             else if (time0 <= go)
             {
-                finalresult.text = "2";
+                //finalresult.text = "2";
+                if (ib2)
+                {
+                    IHBeat.Play();
+                    ib2 = false;
+                }
             }
             else
             {
-                finalresult.text = "3";
+                //finalresult.text = "3";
+                if (fb)
+                {
+                    FHBeat.Play();
+                    fb = false;
+                }
                 begin = true;
                 if (ai == true)
                 {
@@ -84,17 +104,24 @@ public class GameLogic : MonoBehaviour
                         lchoice = LeftPlayer.strikeL;
                         //Debug.Log(AISpeed);
                         LeftPlayer.timeL = Time.deltaTime;
+                        LeftPlayer.anim.SetTrigger("TriggerRun");
+                        LeftPlayer.katanaOff.SetActive(false);
+                        LeftPlayer.katanaOn.SetActive(true);
                     }
                 }
                 if (rchoice == 0 && lchoice == 0) { /*result = "Begin"; */ } //Initial
-                else if (rchoice == 0 && lchoice != 0) { result = Right + " loses"; } //Rei didn't move
-                else if (lchoice == 0 && rchoice != 0) { result = Left + " loses"; } //Shogun didn't move
+                else if (rchoice == 0 && lchoice != 0) { result = Right + " loses"; winner = 1; } //Rei didn't move
+                else if (lchoice == 0 && rchoice != 0) { result = Left + " loses"; winner = 2; } //Shogun didn't move
                 else
                 {
-                    if (LeftPlayer.timeL > RightPlayer.timeR + 2f) //Rei is patient
-                        result = Right + " Wins, patience";
-                    else if (RightPlayer.timeR > LeftPlayer.timeL + 2f) //Shogun is patient; icrease to make difficult mean value = 0.5f
-                        result = Left + " Wins, patience";
+                    if (LeftPlayer.timeL > RightPlayer.timeR + 0.8f) //Rei is patient
+                    {
+                        result = Right + " Wins, patience"; winner = 2;
+                    }
+                    else if (RightPlayer.timeR > LeftPlayer.timeL + 0.8f) //Shogun is patient; increase to make difficult mean value = 0.5f
+                    {
+                        result = Left + " Wins, patience"; winner = 1;
+                    }
                     else
                     {
                         if (rchoice != lchoice)
@@ -104,10 +131,12 @@ public class GameLogic : MonoBehaviour
                                 if (lchoice == 2)
                                 {
                                     result = Left + " wins"; //Shogun: Paper x Rei: Rock
+                                    winner = 1;
                                 }
                                 else if (lchoice == 3)
                                 {
                                     result = Right + " wins"; //Shogun: Scissor x Rei: Rock
+                                    winner = 2;
                                 }
                             }
                             else if (rchoice == 2)
@@ -115,10 +144,12 @@ public class GameLogic : MonoBehaviour
                                 if (lchoice == 1)
                                 {
                                     result = Right + " wins"; //Shogun: Rock x Rei: Paper
+                                    winner = 2;
                                 }
                                 else if (lchoice == 3)
                                 {
                                     result = Left + " wins"; //Shogun: Scissor x Rei: Paper
+                                    winner = 1;
                                 }
                             }
                             else if (rchoice == 3)
@@ -126,31 +157,44 @@ public class GameLogic : MonoBehaviour
                                 if (lchoice == 1)
                                 {
                                     result = Left + " wins"; //Shogun: Rock x Rei: Scissor
+                                    winner = 1;
                                 }
                                 else if (lchoice == 2)
                                 {
                                     result = Right + " wins"; //Shogun: Paper x Rei: Scissor
+                                    winner = 2;
                                 }
                             }
                         }
-                        else { result = "Again!"; } //Draw
+                        else { result = "Again!"; winner = 0; } //Draw
                     }
                 }
 
-                if(LeftPlayer.pos - RightPlayer.pos >= 0 && LeftPlayer.pos - RightPlayer.pos < 1)
+                if(LeftPlayer.pos - RightPlayer.pos >= -10) // && LeftPlayer.pos - RightPlayer.pos < 1)
                 {
                     LeftPlayer.anim.SetTrigger("TriggerUp");
                     RightPlayer.anim.SetTrigger("TriggerUp");
                 }
 
-                if (LeftPlayer.pos - RightPlayer.pos >= 4)
+                if (LeftPlayer.pos - RightPlayer.pos >= 5)
                 {
                     LeftPlayer.strikeL = 0;
                     RightPlayer.strikeR = 0;
                     ready = false;
                     begin = false;
-                    finalresult.text = result;
+                    //finalresult.text = result;
                     end = true;
+                    if (winner == 1)
+                    {
+                        RightPlayer.anim.SetTrigger("TriggerDeath");
+                        LeftPlayer.anim.SetTrigger("TriggerEnd");
+
+                    }
+                    else if (winner == 2)
+                    {
+                        LeftPlayer.anim.SetTrigger("TriggerDeath");
+                        RightPlayer.anim.SetTrigger("TriggerEnd");
+                    }
                 }
             }
             if (LeftPlayer.llose == true && RightPlayer.rlose == true)
