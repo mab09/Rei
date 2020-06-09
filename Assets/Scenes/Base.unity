@@ -1901,7 +1901,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh38216
+  m_Name: pb_Mesh-123750
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2575,10 +2575,15 @@ PrefabInstance:
       propertyPath: button6
       value: 
       objectReference: {fileID: 135965259}
+    - target: {fileID: 3452737851202311099, guid: b045c5c1363b09647a478aa42075fd7c,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 58beeb0d59b43d645ad68486c8fce110, type: 2}
     - target: {fileID: 4710929080099356353, guid: b045c5c1363b09647a478aa42075fd7c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4710929080099356353, guid: b045c5c1363b09647a478aa42075fd7c,
         type: 3}
@@ -2664,10 +2669,14 @@ PrefabInstance:
       propertyPath: button2
       value: 
       objectReference: {fileID: 243946413}
+    - target: {fileID: 897290719, guid: 85c929c5732777e4b92f98a584a07edd, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1813460645663164089, guid: 85c929c5732777e4b92f98a584a07edd,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 1813460645663164089, guid: 85c929c5732777e4b92f98a584a07edd,
         type: 3}
@@ -2723,6 +2732,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Shogun
+      objectReference: {fileID: 0}
+    - target: {fileID: 8620091004536744899, guid: 85c929c5732777e4b92f98a584a07edd,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: abfe7132d1c362145bbb6ade31a46341, type: 2}
+    - target: {fileID: 8620091004536744899, guid: 85c929c5732777e4b92f98a584a07edd,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8620091004536744899, guid: 85c929c5732777e4b92f98a584a07edd,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85c929c5732777e4b92f98a584a07edd, type: 3}

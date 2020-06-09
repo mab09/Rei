@@ -62,17 +62,25 @@ public class GameLogic : MonoBehaviour
             time0 += Time.deltaTime;
             LeftPlayer.timeL += Time.deltaTime;
             RightPlayer.timeR += Time.deltaTime;
-            if (time0 <= 2) finalresult.text = "1";
-            else if (time0 <= go) finalresult.text = "2";
+            if (time0 <= 2)
+            {
+                finalresult.text = "1";
+                LeftPlayer.anim.SetTrigger("TriggerReady");
+                RightPlayer.anim.SetTrigger("TriggerReady");
+            }
+            else if (time0 <= go)
+            {
+                finalresult.text = "2";
+            }
             else
             {
                 finalresult.text = "3";
                 begin = true;
                 if (ai == true)
                 {
-                    if (time0 >= go + AISpeed) 
+                    if (time0 >= go + AISpeed)
                     {
-                        LeftPlayer.strikeL = AIChoice; 
+                        LeftPlayer.strikeL = AIChoice;
                         lchoice = LeftPlayer.strikeL;
                         //Debug.Log(AISpeed);
                         LeftPlayer.timeL = Time.deltaTime;
@@ -128,7 +136,14 @@ public class GameLogic : MonoBehaviour
                         else { result = "Again!"; } //Draw
                     }
                 }
-                if (LeftPlayer.pos - RightPlayer.pos >= 6)
+
+                if(LeftPlayer.pos - RightPlayer.pos >= 0 && LeftPlayer.pos - RightPlayer.pos < 1)
+                {
+                    LeftPlayer.anim.SetTrigger("TriggerUp");
+                    RightPlayer.anim.SetTrigger("TriggerUp");
+                }
+
+                if (LeftPlayer.pos - RightPlayer.pos >= 4)
                 {
                     LeftPlayer.strikeL = 0;
                     RightPlayer.strikeR = 0;
