@@ -1,5 +1,7 @@
 # Project-Rei
 
+Watch PreAlpha Here - https://www.youtube.com/watch?v=YxqZ9x0wPA8
+
 Have you ever played "Ready Steady Bang" ?
 Project Rei will be a glorified rock x paper x scissors with the timing and double player mechanic of ready steady bang.
 Picture this:
