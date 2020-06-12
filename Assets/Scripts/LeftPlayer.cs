@@ -61,6 +61,18 @@ public class LeftPlayer : MonoBehaviour
 
     void FixedUpdate()
     {
+        if(GameLogic.ai == true)
+        {
+            button1.gameObject.SetActive(false);
+            button2.gameObject.SetActive(false);
+            button3.gameObject.SetActive(false);
+        }
+        else
+        {
+            button1.gameObject.SetActive(true);
+            button2.gameObject.SetActive(true);
+            button3.gameObject.SetActive(true);
+        }
         pos = transform.position.x;
         movement = new Vector3(speed * Time.fixedDeltaTime, 0, 0);
         //movement = transform.TransformDirection(translation * speed * -1);

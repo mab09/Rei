@@ -9,7 +9,7 @@ public class GameLogic : MonoBehaviour
     public static bool begin, ready, ai; 
     private float time0, timeL, timeR, go, AISpeed;
     private bool end, reset;
-    public static string aitext = "PvP";
+    public static string aitext = "AI: Off";
     private int AIChoice;
 
     public Button restart, readyB, aibutton;
@@ -31,16 +31,16 @@ public class GameLogic : MonoBehaviour
         begin = false;
         go = Random.Range(2.5f, 10f);
         AIChoice = Random.Range(1, 4);
-        AISpeed = Random.Range(0.2f, 1.5f);
+        AISpeed = Random.Range(0.2f, 2f);
     }
 
     void AIOnClick()
     {
         ai = !ai;
         if (ai)
-            aitext = "PvE"; //aibutton.GetComponentInChildren<Text>().text = "PvE";
+            aitext = "AI: On"; //aibutton.GetComponentInChildren<Text>().text = "PvE";
         else
-            aitext = "PvP"; //aibutton.GetComponentInChildren<Text>().text = "PvP";
+            aitext = "AI: Off"; //aibutton.GetComponentInChildren<Text>().text = "PvP";
     }
 
     void ReadyOnClick()
@@ -74,13 +74,14 @@ public class GameLogic : MonoBehaviour
         else if (rchoice == 3) rattack = "TriggerFront";
 
         if (ready == true && end == false) {
+            readyB.gameObject.SetActive(false);
             time0 += Time.deltaTime;
             if(LeftPlayer.lcount == true) timeL += Time.deltaTime;
             if(RightPlayer.rcount == true) timeR += Time.deltaTime;
 
             if (time0 <= 2)
             {
-               // finalresult.text = "1";
+                finalresult.text = "|";
                 if (ib1)
                 {
                     IHBeat.Play();
@@ -91,7 +92,7 @@ public class GameLogic : MonoBehaviour
             }
             else if (time0 <= go)
             {
-                //finalresult.text = "2";
+                finalresult.text = "| |";
                 if (ib2)
                 {
                     IHBeat.Play();
@@ -100,7 +101,7 @@ public class GameLogic : MonoBehaviour
             }
             else
             {
-                //finalresult.text = "3";
+                finalresult.text = "<b>| | |</b>";
                 if (fb)
                 {
                     FHBeat.Play();
@@ -113,8 +114,9 @@ public class GameLogic : MonoBehaviour
                     {
                         LeftPlayer.strikeL = AIChoice;
                         lchoice = LeftPlayer.strikeL;
-                        Debug.Log(AISpeed);
-                        timeL = Time.deltaTime;
+                        // Debug.Log(AISpeed);
+                        //timeL = Time.deltaTime;
+                        LeftPlayer.lcount = false;
                         LeftPlayer.anim.SetTrigger("TriggerRun");
                         LeftPlayer.katanaOff.SetActive(false);
                         LeftPlayer.katanaOn.SetActive(true);
@@ -266,6 +268,7 @@ public class GameLogic : MonoBehaviour
             RightPlayer.rcount = true;
             LeftPlayer.strikeL = 0;
             RightPlayer.strikeR = 0;
+            readyB.gameObject.SetActive(true);
            // reset = false;
            // ready = false;
            // end = false;
