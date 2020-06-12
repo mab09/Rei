@@ -506,7 +506,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Rock
+  m_Text: Eagle's Flight
 --- !u!222 &293676431
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -616,7 +616,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Scissor
+  m_Text: Serpent's Strike
 --- !u!222 &346666544
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -694,7 +694,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Rock
+  m_Text: Eagle's Flight
 --- !u!222 &397479459
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -709,7 +709,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-258726
+  m_Name: pb_Mesh-1744
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1768,7 +1768,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Paper
+  m_Text: Tiger's Might
 --- !u!222 &1117743064
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2959,7 +2959,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Scissor
+  m_Text: Serpent's Strike
 --- !u!222 &2017396351
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3037,7 +3037,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Paper
+  m_Text: Tiger's Might
 --- !u!222 &2042342637
 CanvasRenderer:
   m_ObjectHideFlags: 0

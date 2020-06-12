@@ -10,9 +10,9 @@ public class LeftPlayer : MonoBehaviour
     public static int strikeL = 0; //no action
     [Header("Movement")]
     public float speed = 50;
-    public static float pos = 0, timeL;
+    public static float pos = 0;
     public Button button1, /* button0 */ button2, button3;
-    public static bool llose = false;
+    public static bool llose = false, lcount = true;
     public static Animator anim;
     public static GameObject katanaOn, katanaOff;
 
@@ -40,7 +40,8 @@ public class LeftPlayer : MonoBehaviour
             if (GameLogic.begin == true)
             {
                 strikeL = a;
-                timeL = Time.deltaTime;
+                lcount = false;
+                //timeL = Time.deltaTime;
                 anim.SetTrigger("TriggerRun");
                 katanaOff.SetActive(false);
                 katanaOn.SetActive(true);
@@ -48,6 +49,10 @@ public class LeftPlayer : MonoBehaviour
             else
             {
                 //shogun is impatient
+                strikeL = a;
+                anim.SetTrigger("TriggerBad");
+                katanaOff.SetActive(false);
+                katanaOn.SetActive(true);
                 llose = true;
             }
         }
@@ -59,7 +64,7 @@ public class LeftPlayer : MonoBehaviour
         pos = transform.position.x;
         movement = new Vector3(speed * Time.fixedDeltaTime, 0, 0);
         //movement = transform.TransformDirection(translation * speed * -1);
-        if (strikeL != 0)
+        if (strikeL != 0 && llose == false)
             finalMovement = Vector3.Lerp(finalMovement, movement, Time.fixedDeltaTime);
         else
             finalMovement = new Vector3(0, 0, 0);

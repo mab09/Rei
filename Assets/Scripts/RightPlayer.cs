@@ -10,9 +10,9 @@ public class RightPlayer : MonoBehaviour
     public static int strikeR = 0; //no action
     [Header("Movement")]
     public float speed = 50;
-    public static float pos = 0, timeR;
+    public static float pos = 0;
     public Button /* button0 */ button4, button5, button6;
-    public static bool rlose = false;
+    public static bool rlose = false, rcount = true;
     public static Animator anim;
     private GameObject katanaOn, katanaOff;
 
@@ -40,7 +40,8 @@ public class RightPlayer : MonoBehaviour
             if (GameLogic.begin == true)
             {
                 strikeR = a;
-                timeR = Time.deltaTime;
+                rcount = false;
+                //timeR = Time.deltaTime;
                 anim.SetTrigger("TriggerRun");
                 katanaOff.SetActive(false);
                 katanaOn.SetActive(true);
@@ -48,6 +49,10 @@ public class RightPlayer : MonoBehaviour
             else
             {
                 //rei is impatient
+                strikeR = a;
+                anim.SetTrigger("TriggerBad");
+                katanaOff.SetActive(false);
+                katanaOn.SetActive(true);
                 rlose = true;
             }
         }
@@ -58,7 +63,7 @@ public class RightPlayer : MonoBehaviour
         pos = transform.position.x;
         movement = new Vector3(-1 * speed * Time.fixedDeltaTime, 0, 0);
         //movement = transform.TransformDirection(translation * speed);
-        if (strikeR != 0)
+        if (strikeR != 0 && rlose == false)
             finalMovement = Vector3.Lerp(finalMovement, movement, Time.fixedDeltaTime);
         else
             finalMovement = new Vector3(0, 0, 0);
