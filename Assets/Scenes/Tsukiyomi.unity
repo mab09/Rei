@@ -2282,6 +2282,10 @@ PrefabInstance:
       propertyPath: speed
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 897290718, guid: 85c929c5732777e4b92f98a584a07edd, type: 3}
+      propertyPath: aibutton
+      value: 
+      objectReference: {fileID: 832510813}
     - target: {fileID: 897290719, guid: 85c929c5732777e4b92f98a584a07edd, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -2663,7 +2667,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   restart: {fileID: 567957826}
   readyB: {fileID: 1382792537}
-  aibutton: {fileID: 832510813}
   finalresult: {fileID: 1418121202}
   IHBeat: {fileID: 2092420317}
   FHBeat: {fileID: 851685556}

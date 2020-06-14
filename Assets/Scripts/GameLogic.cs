@@ -5,43 +5,38 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameLogic : MonoBehaviour
-{                 //start move  //start count
-    public static bool begin, ready, ai; 
-    private float time0, timeL, timeR, go, AISpeed;
-    private bool end, reset;
-    public static string aitext = "AI: Off";
-    private int AIChoice;
+{
+    /* ------------------------------------------------------------------------------------------- */
+                       //start move  //start count
+    public static bool begin,        ready,        reset;
 
-    public Button restart, readyB, aibutton;
+    public Button restart, readyB;
     public Text finalresult;
 
     public AudioSource IHBeat, FHBeat;
-    private bool ib1 = true, ib2 = true, fb = true; 
+
+    private float time0, timeL, timeR, AISpeed, go;
+    private int AIChoice;
+    private bool end, ib1 = true, ib2 = true, fb = true;
+
+    /* ------------------------------------------------------------------------------------------- */
 
     // Start is called before the first frame update
     void Start() 
     {
         restart.onClick.AddListener(ResetOnClick);
         readyB.onClick.AddListener(ReadyOnClick);
-        aibutton.onClick.AddListener(AIOnClick);
         //finalresult.text = "Begin";
-        end = false;
+       // end = false;
         reset = false;
         ready = false;
         begin = false;
         go = Random.Range(2.5f, 10f);
         AIChoice = Random.Range(1, 4);
-        AISpeed = Random.Range(0.2f, 2f);
+        AISpeed = Random.Range(0.2f, 1.5f);
     }
 
-    void AIOnClick()
-    {
-        ai = !ai;
-        if (ai)
-            aitext = "AI: On"; //aibutton.GetComponentInChildren<Text>().text = "PvE";
-        else
-            aitext = "AI: Off"; //aibutton.GetComponentInChildren<Text>().text = "PvP";
-    }
+    /* ------------------------------------------------------------------------------------------- */
 
     void ReadyOnClick()
     {
@@ -51,20 +46,23 @@ public class GameLogic : MonoBehaviour
         ready = true;
     }
 
+    /* ------------------------------------------------------------------------------------------- */
+
     void ResetOnClick()
     {
         reset = true;
     }
 
+    /* ------------------------------------------------------------------------------------------- */
+
     // Update is called once per frame
     void Update()
     {
-        string result = "Begin", Left = "Shogun", Right = "Rei", lattack = "TriggerUp", rattack = "TriggerUp";
-        int lchoice = LeftPlayer.strikeL;
-        int rchoice = RightPlayer.strikeR;
-        int winner = 0;
-        aibutton.GetComponentInChildren<Text>().text = aitext;
+        int lchoice = LeftPlayer.strikeL, rchoice = RightPlayer.strikeR, winner = 0;
+        string result = "Begin", Left = "Shogun", Right = "Rei", lattack = "none", rattack = "none";
 
+
+        /* ---Code to select attack animation--- */
         if(lchoice == 1) lattack = "TriggerUp";
         else if (lchoice == 2) lattack = "TriggerDown";
         else if (lchoice == 3) lattack = "TriggerFront";
@@ -72,12 +70,19 @@ public class GameLogic : MonoBehaviour
         if (rchoice == 1) rattack = "TriggerUp";
         else if (rchoice == 2) rattack = "TriggerDown";
         else if (rchoice == 3) rattack = "TriggerFront";
+        /* ---Code to select attack animation--- */
 
-        if (ready == true && end == false) {
+
+        if (ready == true)// && end == false)
+        {
             readyB.gameObject.SetActive(false);
+
+            /* --start counting delta time-- */
             time0 += Time.deltaTime;
-            if(LeftPlayer.lcount == true) timeL += Time.deltaTime;
-            if(RightPlayer.rcount == true) timeR += Time.deltaTime;
+            if (LeftPlayer.lcount == true) timeL += Time.deltaTime;
+            if (RightPlayer.rcount == true) timeR += Time.deltaTime;
+            /* --start counting delta time-- */
+
 
             if (time0 <= 2)
             {
@@ -90,52 +95,70 @@ public class GameLogic : MonoBehaviour
                 LeftPlayer.anim.SetTrigger("TriggerReady");
                 RightPlayer.anim.SetTrigger("TriggerReady");
             }
+
+
             else if (time0 <= go)
             {
                 finalresult.text = "| |";
+
                 if (ib2)
                 {
                     IHBeat.Play();
                     ib2 = false;
                 }
             }
+
+
             else
             {
+                begin = true;
                 finalresult.text = "<b>| | |</b>";
+
                 if (fb)
                 {
                     FHBeat.Play();
                     fb = false;
                 }
-                begin = true;
-                if (ai == true)
+
+
+                /* ---Code for AI On--- */
+                if (LeftPlayer.ai == true)
                 {
                     if (time0 >= go + AISpeed)
                     {
                         LeftPlayer.strikeL = AIChoice;
                         lchoice = LeftPlayer.strikeL;
-                        // Debug.Log(AISpeed);
-                        //timeL = Time.deltaTime;
                         LeftPlayer.lcount = false;
                         LeftPlayer.anim.SetTrigger("TriggerRun");
                         LeftPlayer.katanaOff.SetActive(false);
                         LeftPlayer.katanaOn.SetActive(true);
                     }
                 }
+                /* ---Code for AI On--- */
+
+
+                /* ---Main Code--- */
                 if (rchoice == 0 && lchoice == 0) { /*result = "Begin"; */ } //Initial
                 else if (rchoice == 0 && lchoice != 0) { result = Right + " loses"; winner = 1; } //Rei didn't move
                 else if (lchoice == 0 && rchoice != 0) { result = Left + " loses"; winner = 2; } //Shogun didn't move
                 else
                 {
+
+
+                    /* ---Code for quick win--- */
                     //Debug.Log(timeL + "|" + timeR);
-                    if (timeL > timeR + 0.05f) //Rei is quick
+                    if (timeL > timeR + 0.1f) //Rei is quick
                     {
                         result = Right + " Wins, speed"; winner = 2;
                     }
-                    else if (timeR > timeL + 0.05f) //Shogun is quick;
+                    else if (timeR > timeL + 0.1f) //Shogun is quick;
                     {
                         result = Left + " Wins, speed"; winner = 1;
                     }
+                    /* ---Code for quick win--- */
+
+
+                    /* ---Code for Taka, Tora, Hebi (Rock, Paper, Scissors)--- */
                     else
                     {
                         if (rchoice != lchoice)
@@ -182,22 +205,30 @@ public class GameLogic : MonoBehaviour
                         }
                         else { result = "Again!"; winner = 0; } //Draw
                     }
-                }
+                    /* ---Code for Taka, Tora, Hebi (Rock, Paper, Scissors)--- */
 
-                if(LeftPlayer.pos - RightPlayer.pos >= -10) // && LeftPlayer.pos - RightPlayer.pos < 1)
+                }
+                /* ---Main Code--- */
+
+
+                /* ---Code for attack animations---*/
+                if (LeftPlayer.pos - RightPlayer.pos >= -10)
                 {
                     LeftPlayer.anim.SetTrigger(lattack);
                     RightPlayer.anim.SetTrigger(rattack);
                 }
+                /* ---Code for attack animations---*/
 
+
+                /* ---Post-Showdown--- */
                 if (LeftPlayer.pos - RightPlayer.pos >= 5)
                 {
                     LeftPlayer.strikeL = 0;
                     RightPlayer.strikeR = 0;
                     ready = false;
-                    begin = false;
+                    //begin = false;
                     //finalresult.text = result;
-                    end = true;
+                    //end = true;
                     if (LeftPlayer.llose == true && RightPlayer.rlose == false)
                     {
                         LeftPlayer.anim.SetTrigger("TriggerDeath");
@@ -233,31 +264,12 @@ public class GameLogic : MonoBehaviour
                         }
                     }
                 }
+                /* ---Post-Showdown--- */
+
             }
-            /* if (LeftPlayer.llose == true && RightPlayer.rlose == true)
-            {
-                //finalresult.text = "Double Harakiri";
-                LeftPlayer.anim.SetTrigger(lattack);
-                RightPlayer.anim.SetTrigger(rattack);
-                //end = true;
-            }
-            else if (LeftPlayer.llose == true)
-            {
-                //finalresult.text = Left + " does Harakiri";
-                LeftPlayer.anim.SetTrigger(lattack);
-                winner = 2;
-                //end = true;
-            }
-            else if (RightPlayer.rlose == true)
-            {
-               // finalresult.text = Right + " does Harakiri";
-                RightPlayer.anim.SetTrigger(rattack);
-                winner = 1;
-                //end = true;
-            } */
         }
 
-
+        /* --Restart Game-- */
         if (reset == true)
         {
             SceneManager.LoadScene(Random.Range(0, SceneManager.sceneCount + 2));
@@ -274,5 +286,7 @@ public class GameLogic : MonoBehaviour
            // end = false;
            // ai = false;
         }
-    } 
+        /* --Restart Game-- */
+
+    }
 }
