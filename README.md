@@ -1,5 +1,7 @@
 # Project-Rei
 
+This is a base concept of the game. Actual game repo is private.
+
 Unity Version - 2019.4.1f1
 
 Watch Alpha Gameplay Here - https://www.youtube.com/watch?v=U_hrpf5-yrU
