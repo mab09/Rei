@@ -28,5 +28,5 @@ Here are the key parts of development:
 4. Animations: attack, death and victory animations
 5. UI: Main menu, etc
 6. Production: Android and iOS, optimizing it all for them
-7. Publish: Appstore and Play store. If the game starts to turn out like I actually envision it, we'll put a price tag otherwise ads, but such that they do not ruin immersion.
+7. Publish: Appstore and Play store. No Ads, or atleast not the ones that ruin immersion.
 
