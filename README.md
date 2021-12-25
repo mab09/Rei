@@ -1,6 +1,6 @@
 # Project-Rei
 
-This is a base concept of the game. Actual game repo is private.
+This is an initial concept. 
 
 Unity Version - 2019.4.1f1
 
