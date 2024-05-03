@@ -87,13 +87,6 @@
       },
       "url": "https://packages.unity.com"
     },
-    "com.unity.ide.vscode": {
-      "version": "1.2.0",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {},
-      "url": "https://packages.unity.com"
-    },
     "com.unity.mathematics": {
       "version": "1.3.1",
       "depth": 3,
@@ -130,10 +123,12 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.progrids": {
-      "version": "3.0.3-preview.4",
+      "version": "3.0.3-preview.6",
       "depth": 0,
       "source": "registry",
-      "dependencies": {},
+      "dependencies": {
+        "com.unity.settings-manager": "1.0.2"
+      },
       "url": "https://packages.unity.com"
     },
     "com.unity.render-pipelines.core": {
@@ -184,7 +179,7 @@
       }
     },
     "com.unity.test-framework": {
-      "version": "1.4.3",
+      "version": "1.4.4",
       "depth": 0,
       "source": "registry",
       "dependencies": {
