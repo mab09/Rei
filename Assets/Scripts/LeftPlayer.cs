@@ -80,7 +80,7 @@ public class LeftPlayer : MonoBehaviour
             {
                 //shogun is impatient
                 strikeL = a;
-                anim.SetTrigger("TriggerBad");
+                anim.SetTrigger("TriggerFalse");
                 katanaOff.SetActive(false);
                 katanaOn.SetActive(true);
                 llose = true;

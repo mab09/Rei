@@ -32,7 +32,7 @@ public class GameLogic : MonoBehaviour
         ready = false;
         begin = false;
         go = Random.Range(2.5f, 10f);
-        AIChoice = Random.Range(1, 4);
+        AIChoice = 1;//Random.Range(1, 4);
         AISpeed = Random.Range(0.2f, 1.5f);
     }
 
@@ -231,36 +231,107 @@ public class GameLogic : MonoBehaviour
                     //end = true;
                     if (LeftPlayer.llose == true && RightPlayer.rlose == false)
                     {
-                        LeftPlayer.anim.SetTrigger("TriggerDeath");
+                        LeftPlayer.anim.SetTrigger("TriggerFalseDeath");
                         RightPlayer.anim.SetTrigger("TriggerWin");
                     }
                     else if (RightPlayer.rlose == true && LeftPlayer.llose == false)
                     {
-                        RightPlayer.anim.SetTrigger("TriggerDeath");
+                        RightPlayer.anim.SetTrigger("TriggerFalseDeath");
                         LeftPlayer.anim.SetTrigger("TriggerWin");
                     }
-                    else if (RightPlayer.rlose == true && LeftPlayer.llose == true)
+                    /*else if (RightPlayer.rlose == true && LeftPlayer.llose == true)
                     {
                         LeftPlayer.anim.SetTrigger("TriggerDraw");
                         RightPlayer.anim.SetTrigger("TriggerDraw");
-                    }
+                    }*/
                     else
                     {
                         if (winner == 1)
                         {
-                            RightPlayer.anim.SetTrigger("TriggerDeath");
+                            switch (rattack)
+                            {
+                                case "TriggerUp":
+                                    RightPlayer.anim.SetTrigger("TriggerUpDeath");
+                                    break;
+
+                                case "TriggerDown":
+                                    RightPlayer.anim.SetTrigger("TriggerDownDeath");
+                                    break;
+
+                                case "TriggerFront":
+                                    RightPlayer.anim.SetTrigger("TriggerFrontDeath");
+                                    break;
+
+                                default:
+                                    RightPlayer.anim.SetTrigger("TriggerReadyDeath");
+                                    break;
+                            }
+
                             LeftPlayer.anim.SetTrigger("TriggerWin");
 
                         }
                         else if (winner == 2)
                         {
-                            LeftPlayer.anim.SetTrigger("TriggerDeath");
+                            switch (lattack)
+                            {
+                                case "TriggerUp":
+                                    LeftPlayer.anim.SetTrigger("TriggerUpDeath");
+                                    break;
+
+                                case "TriggerDown":
+                                    LeftPlayer.anim.SetTrigger("TriggerDownDeath");
+                                    break;
+
+                                case "TriggerFront":
+                                    LeftPlayer.anim.SetTrigger("TriggerFrontDeath");
+                                    break;
+
+                                default:
+                                    LeftPlayer.anim.SetTrigger("TriggerReadyDeath");
+                                    break;
+                            }
+
                             RightPlayer.anim.SetTrigger("TriggerWin");
                         }
                         else
-                        {
-                            LeftPlayer.anim.SetTrigger("TriggerDraw");
-                            RightPlayer.anim.SetTrigger("TriggerDraw");
+                        {   //Draw
+                            switch (lattack)
+                            {
+                                case "TriggerUp":
+                                    LeftPlayer.anim.SetTrigger("TriggerUpDeath");
+                                    break;
+
+                                case "TriggerDown":
+                                    LeftPlayer.anim.SetTrigger("TriggerDownDeath");
+                                    break;
+
+                                case "TriggerFront":
+                                    LeftPlayer.anim.SetTrigger("TriggerFrontDeath");
+                                    break;
+
+                                default:
+                                    LeftPlayer.anim.SetTrigger("TriggerReadyDeath");
+                                    break;
+                            }
+
+                            switch (rattack)
+                            {
+                                case "TriggerUp":
+                                    RightPlayer.anim.SetTrigger("TriggerUpDeath");
+                                    break;
+
+                                case "TriggerDown":
+                                    RightPlayer.anim.SetTrigger("TriggerDownDeath");
+                                    break;
+
+                                case "TriggerFront":
+                                    RightPlayer.anim.SetTrigger("TriggerFrontDeath");
+                                    break;
+
+                                default:
+                                    RightPlayer.anim.SetTrigger("TriggerReadyDeath");
+                                    break;
+                            }
                         }
                     }
                 }

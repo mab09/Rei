@@ -57,7 +57,7 @@ public class RightPlayer : MonoBehaviour
             {
                 //rei is impatient
                 strikeR = a;
-                anim.SetTrigger("TriggerBad");
+                anim.SetTrigger("TriggerFalse");
                 katanaOff.SetActive(false);
                 katanaOn.SetActive(true);
                 rlose = true;
