@@ -239,11 +239,11 @@ public class GameLogic : MonoBehaviour
                         RightPlayer.anim.SetTrigger("TriggerFalseDeath");
                         LeftPlayer.anim.SetTrigger("TriggerWin");
                     }
-                    /*else if (RightPlayer.rlose == true && LeftPlayer.llose == true)
+                    else if (RightPlayer.rlose == true && LeftPlayer.llose == true)
                     {
                         LeftPlayer.anim.SetTrigger("TriggerDraw");
                         RightPlayer.anim.SetTrigger("TriggerDraw");
-                    }*/
+                    }
                     else
                     {
                         if (winner == 1)
@@ -295,43 +295,8 @@ public class GameLogic : MonoBehaviour
                         }
                         else
                         {   //Draw
-                            switch (lattack)
-                            {
-                                case "TriggerUp":
-                                    LeftPlayer.anim.SetTrigger("TriggerUpDeath");
-                                    break;
-
-                                case "TriggerDown":
-                                    LeftPlayer.anim.SetTrigger("TriggerDownDeath");
-                                    break;
-
-                                case "TriggerFront":
-                                    LeftPlayer.anim.SetTrigger("TriggerFrontDeath");
-                                    break;
-
-                                default:
-                                    LeftPlayer.anim.SetTrigger("TriggerReadyDeath");
-                                    break;
-                            }
-
-                            switch (rattack)
-                            {
-                                case "TriggerUp":
-                                    RightPlayer.anim.SetTrigger("TriggerUpDeath");
-                                    break;
-
-                                case "TriggerDown":
-                                    RightPlayer.anim.SetTrigger("TriggerDownDeath");
-                                    break;
-
-                                case "TriggerFront":
-                                    RightPlayer.anim.SetTrigger("TriggerFrontDeath");
-                                    break;
-
-                                default:
-                                    RightPlayer.anim.SetTrigger("TriggerReadyDeath");
-                                    break;
-                            }
+                            LeftPlayer.anim.SetTrigger("TriggerDraw");
+                            RightPlayer.anim.SetTrigger("TriggerDraw");
                         }
                     }
                 }
