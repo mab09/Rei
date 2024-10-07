@@ -1,0 +1,5 @@
+C:/Users/mirza/Documents/GitHub/Rei/.utmp/Debug/3q3gq3a2/arm64-v8a/CMakeFiles/edit_cache.dir
+C:/Users/mirza/Documents/GitHub/Rei/.utmp/Debug/3q3gq3a2/arm64-v8a/CMakeFiles/rebuild_cache.dir
+C:/Users/mirza/Documents/GitHub/Rei/.utmp/Debug/3q3gq3a2/arm64-v8a/FramePacing/CMakeFiles/swappywrapper.dir
+C:/Users/mirza/Documents/GitHub/Rei/.utmp/Debug/3q3gq3a2/arm64-v8a/FramePacing/CMakeFiles/edit_cache.dir
+C:/Users/mirza/Documents/GitHub/Rei/.utmp/Debug/3q3gq3a2/arm64-v8a/FramePacing/CMakeFiles/rebuild_cache.dir
