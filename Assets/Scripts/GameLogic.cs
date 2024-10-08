@@ -24,6 +24,8 @@ public class GameLogic : MonoBehaviour
     // Start is called before the first frame update
     void Start() 
     {
+        Application.targetFrameRate = 60;
+
         restart.onClick.AddListener(ResetOnClick);
         readyB.onClick.AddListener(ReadyOnClick);
         //finalresult.text = "Begin";
@@ -32,7 +34,7 @@ public class GameLogic : MonoBehaviour
         ready = false;
         begin = false;
         go = Random.Range(2.5f, 10f);
-        AIChoice = 1;//Random.Range(1, 4);
+        AIChoice = Random.Range(1, 4);
         AISpeed = Random.Range(0.2f, 1.5f);
     }
 
