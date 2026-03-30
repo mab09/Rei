@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f97bd0b1749cd3a4a8b0f7c9f0549551, type: 3}
+  m_Name: DuelRoundConfig_Default
+  m_EditorClassIdentifier: Assembly-CSharp::Rei.Runtime.Duel.DuelRoundConfig
+  beatInterval: 1
+  randomThirdBeatMinDelay: 0.5
+  randomThirdBeatMaxDelay: 3
+  speedAdvantageThreshold: 0.08
+  counterWindowDuration: 0.5
+  moveSpeed: 20
+  strikeDistance: 0
+  passThroughDistance: 7.5
+  aiInitialMinDelay: 0.05
+  aiInitialMaxDelay: 0.75
+  aiCounterChance: 0.5
+  aiCounterMinDelay: 0.09
+  aiCounterMaxDelay: 0.2
