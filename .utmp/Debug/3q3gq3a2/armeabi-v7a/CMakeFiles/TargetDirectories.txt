@@ -1,5 +1,0 @@
-C:/Users/mirza/Documents/GitHub/Rei/.utmp/Debug/3q3gq3a2/armeabi-v7a/CMakeFiles/edit_cache.dir
-C:/Users/mirza/Documents/GitHub/Rei/.utmp/Debug/3q3gq3a2/armeabi-v7a/CMakeFiles/rebuild_cache.dir
-C:/Users/mirza/Documents/GitHub/Rei/.utmp/Debug/3q3gq3a2/armeabi-v7a/FramePacing/CMakeFiles/swappywrapper.dir
-C:/Users/mirza/Documents/GitHub/Rei/.utmp/Debug/3q3gq3a2/armeabi-v7a/FramePacing/CMakeFiles/edit_cache.dir
-C:/Users/mirza/Documents/GitHub/Rei/.utmp/Debug/3q3gq3a2/armeabi-v7a/FramePacing/CMakeFiles/rebuild_cache.dir
