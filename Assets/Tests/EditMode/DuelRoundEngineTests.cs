@@ -1,3 +1,4 @@
+#if UNITY_INCLUDE_TESTS
 using NUnit.Framework;
 using Rei.Runtime.Duel;
 using UnityEngine;
@@ -208,3 +209,4 @@ public class DuelRoundEngineTests
         }
     }
 }
+#endif
